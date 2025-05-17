@@ -2,8 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -12,13 +10,16 @@ import model.Funcion;
 import model.Pelicula;
 import model.Sala;
 import view.Internal_crearFuncion;
+import model.Servicio;
 
 public class Ctrl_Inter_crearFuncion implements ActionListener {
 
     public Internal_crearFuncion crearFuncion;
+    private Servicio serv;
 
     public Ctrl_Inter_crearFuncion() {
 
+        this.serv = new Servicio();
         this.crearFuncion = new Internal_crearFuncion();
         crearFuncion.setVisible(true);
 
@@ -31,7 +32,7 @@ public class Ctrl_Inter_crearFuncion implements ActionListener {
 
     private void cargarPeliculas() {
 
-        List<Pelicula> peliculas = Pelicula.obtenerTodasLasPeliculas();
+        List<Pelicula> peliculas = serv.obtenerTodasLasPeliculas();
 
         DefaultListModel modeloListaPelicula = new DefaultListModel<>();
 
@@ -55,12 +56,12 @@ public class Ctrl_Inter_crearFuncion implements ActionListener {
         if(validarDatos()){
             
             
-            Pelicula pelicula = Pelicula.buscarPelicula( crearFuncion.list_peliculas.getSelectedValue().toString());
+            Pelicula pelicula = serv.buscarPelicula( crearFuncion.list_peliculas.getSelectedValue().toString());
             Date horario = (Date) crearFuncion.spinner_horario.getValue();
-            Sala sala = Sala.buscarSala((int) crearFuncion.spinner_salas.getValue());
+            Sala sala = serv.buscarSala((int) crearFuncion.spinner_salas.getValue());
             Funcion funcion = new Funcion(horario, pelicula, sala);
             pelicula.addFuncion(funcion);
-            Funcion.guardarFuncion(funcion);
+            serv.guardarFuncion(funcion);
         }else{
             JOptionPane.showMessageDialog(null, "Error al validar los datos.");
         }
@@ -78,7 +79,7 @@ public class Ctrl_Inter_crearFuncion implements ActionListener {
         
         int numeroSala = (int) crearFuncion.spinner_salas.getValue();
         
-        if(Funcion.validarHorario( (Date) crearFuncion.spinner_horario.getValue(), numeroSala)){
+        if(serv.validarHorario( (Date) crearFuncion.spinner_horario.getValue(), numeroSala)){
             JOptionPane.showMessageDialog(null, "El horario ya ha sido asignado a otra funcion o es antiguo.");
             return false;
         }

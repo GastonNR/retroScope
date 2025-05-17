@@ -33,7 +33,6 @@ public class Servicio {
 
     //Metodos de Empleado
     public void guardarEmpleado(Empleado empleado) {
-
         ctr_persis.guardarEmpleado(empleado);
 
     }
@@ -44,75 +43,63 @@ public class Servicio {
     }
 
     public Empleado buscarEmpleado(int id) {
-
         return ctr_persis.buscarEmpleado(id);
 
     }
 
     public void eliminarEmpleado(Empleado empleado) {
-
         ctr_persis.eliminarEmpleado(empleado);
 
     }
 
     //Metodos para entrada
     public Entrada buscarEntrada(int id) {
-
         return ctr_persis.buscarEntrada(id);
 
     }
 
     public void venderEntrada(int id) {
-
         ctr_persis.venderEntrada(id);
     }
 
     //Metodos para Funcion
     public void guardarFuncion(Funcion funcion) {
-
         ctr_persis.guardarFuncion(funcion);
 
     }
 
     public Funcion buscarFuncion(int id) {
-
         return ctr_persis.buscarFuncion(id);
 
     }
 
     public List<Funcion> obtenerTodasLasFunciones() {
-
         return ctr_persis.obtenerTodasLasFunciones();
 
     }
 
     public void eliminarFuncion(int id) {
-
         ctr_persis.eliminarFuncion(id);
 
     }
 
     public boolean validarHorario(Date horario, int numeroSala) {
-
         return ctr_persis.validarHorario(horario, numeroSala);
 
     }
 
     //Metodos para pelicula
     public void guardarPelicula(Pelicula pelicula) {
-
         ctr_persis.guardarPelicula(pelicula);
 
     }
 
     public List<Pelicula> obtenerTodasLasPeliculas() {
-
         return ctr_persis.obtenerTodasLasPeliculas();
 
     }
 
     public void borrarPelicula(Pelicula pelicula) throws NonexistentEntityException {
-
         ctr_persis.borrarPelicula(pelicula);
 
     }
@@ -123,20 +110,17 @@ public class Servicio {
     }
 
     public Pelicula buscarPelicula(String titulo) {
-
         return ctr_persis.buscarPelicula(titulo);
 
     }
 
     //Metodo para salas
     public List<Sala> obtenerTodasLasSalas() {
-
         return ctr_persis.obtenerTodasLasSalas();
 
     }
 
     public Sala buscarSala(int numeroSala) {
-
         return ctr_persis.buscarSala(numeroSala);
 
     }
@@ -148,19 +132,16 @@ public class Servicio {
     }
 
     public Venta buscarVenta(int id) {
-
         return ctr_persis.buscarVenta(id);
 
     }
 
     public List<Venta> cargarVentas() {
-
         return ctr_persis.cargarVentas();
 
     }
 
     public void eliminarVenta(int id) {
-
         ctr_persis.eliminarVenta(id);
 
     }

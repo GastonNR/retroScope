@@ -12,6 +12,7 @@ import model.Entrada;
 import model.Funcion;
 import model.Pelicula;
 import view.Internal_gestionarFunciones;
+import model.Servicio;
 
 /**
  *
@@ -20,9 +21,11 @@ import view.Internal_gestionarFunciones;
 public class Ctrl_Inter_gestorFunciones implements ActionListener {
 
     public Internal_gestionarFunciones gestorFunciones;
+    private Servicio serv;
 
     public Ctrl_Inter_gestorFunciones() {
-
+        
+        this.serv = new Servicio();
         this.gestorFunciones = new Internal_gestionarFunciones();
         gestorFunciones.setVisible(true);
         this.cargarFunciones();
@@ -75,7 +78,7 @@ public class Ctrl_Inter_gestorFunciones implements ActionListener {
     }
 
     private void cargarFunciones() {
-        List<Funcion> funciones = Funcion.obtenerTodasLasFunciones();
+        List<Funcion> funciones = serv.obtenerTodasLasFunciones();
 
         if (funciones != null) {
             DefaultTableModel modeloFunciones = new DefaultTableModel();
@@ -93,7 +96,7 @@ public class Ctrl_Inter_gestorFunciones implements ActionListener {
     }
 
     private void buscarFuncion() {
-        Funcion funcionEncontrada = Funcion.buscarFuncion(Integer.parseInt(gestorFunciones.txt_buscarFuncion.getText().trim()));
+        Funcion funcionEncontrada = serv.buscarFuncion(Integer.parseInt(gestorFunciones.txt_buscarFuncion.getText().trim()));
         DefaultTableModel modeloTablaFunciones = (DefaultTableModel) gestorFunciones.table_funciones.getModel();
 
         int filaEncontrada = -1;
@@ -119,7 +122,7 @@ public class Ctrl_Inter_gestorFunciones implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ingrese un titulo");
             return;
         }
-        Pelicula peliculaEncontrada = Pelicula.buscarPelicula(titulo);
+        Pelicula peliculaEncontrada = serv.buscarPelicula(titulo);
         if (peliculaEncontrada != null) {
             List<Funcion> funciones = peliculaEncontrada.getFunciones();
             DefaultTableModel modeloFuncionesPorPelicula = new DefaultTableModel();
@@ -153,13 +156,13 @@ public class Ctrl_Inter_gestorFunciones implements ActionListener {
         if (filaSeleccionada != -1) {
             int valorId = (int) gestorFunciones.table_funciones.getValueAt(filaSeleccionada, 0);
 
-            Funcion funcionEncontrada = Funcion.buscarFuncion(valorId);
+            Funcion funcionEncontrada = serv.buscarFuncion(valorId);
 
             if (funcionEncontrada != null) {
                 int respuestaEliminacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la funcion?", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (respuestaEliminacion == JOptionPane.YES_OPTION) {
-                    Funcion.eliminarFuncion(valorId);
+                    serv.eliminarFuncion(valorId);
                     JOptionPane.showMessageDialog(null, "Funcion eliminada exitosamente");
                     cargarFunciones();
                 }
@@ -174,7 +177,7 @@ public class Ctrl_Inter_gestorFunciones implements ActionListener {
     }
 
     private void cargarEntradas(int id) {
-        Funcion funcionEncontrada = Funcion.buscarFuncion(id);
+        Funcion funcionEncontrada = serv.buscarFuncion(id);
         List<Entrada> entradas = funcionEncontrada.getEntrada();
 
         if (funcionEncontrada != null) {

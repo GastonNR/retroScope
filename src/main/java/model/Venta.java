@@ -86,49 +86,49 @@ public class Venta implements Serializable {
         this.funcion = funcion;
     }
 
-    public static void guardarVenta(Venta venta){
-        VentaJpaController ventaJpa = new VentaJpaController();
-        
-        try{
-            ventaJpa.create(venta);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error al guardar la venta");
-        }
-    }
-    
-    public static Venta buscarVenta(int id){
-        VentaJpaController ctr_jpaVenta = new VentaJpaController();
-        
-        try{
-            return ctr_jpaVenta.findVenta(id);
-        } catch (Exception e){
-            System.out.println("Error de carga: " + e);
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos de la venta");
-            return null;
-        }
-    }
-    
-    public static List<Venta> cargarVentas(){
-        
-        VentaJpaController ctr_jpaVenta = new VentaJpaController();
-        
-        try{
-            return ctr_jpaVenta.findVentaEntities();
-        } catch (Exception e){
-            System.out.println("Error de carga: " + e);
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos de las ventas");
-            return null;
-        }
-    }
-    
-    public static void eliminarVenta(int id){
-        VentaJpaController ctr_jpaVenta = new VentaJpaController();
-        
-        try{
-            ctr_jpaVenta.destroy(id);
-        } catch (Exception e){
-            System.out.println("Error al eliminar la venta: " + e);
-            JOptionPane.showMessageDialog(null, "Error al eliminar los datos de la venta");
-        }
-    }
+//    public static void guardarVenta(Venta venta){
+//        VentaJpaController ventaJpa = new VentaJpaController();
+//        
+//        try{
+//            ventaJpa.create(venta);
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, "Error al guardar la venta");
+//        }
+//    }
+//    
+//    public static Venta buscarVenta(int id){
+//        VentaJpaController ctr_jpaVenta = new VentaJpaController();
+//        
+//        try{
+//            return ctr_jpaVenta.findVenta(id);
+//        } catch (Exception e){
+//            System.out.println("Error de carga: " + e);
+//            JOptionPane.showMessageDialog(null, "Error al cargar los datos de la venta");
+//            return null;
+//        }
+//    }
+//    
+//    public static List<Venta> cargarVentas(){
+//        
+//        VentaJpaController ctr_jpaVenta = new VentaJpaController();
+//        
+//        try{
+//            return ctr_jpaVenta.findVentaEntities();
+//        } catch (Exception e){
+//            System.out.println("Error de carga: " + e);
+//            JOptionPane.showMessageDialog(null, "Error al cargar los datos de las ventas");
+//            return null;
+//        }
+//    }
+//    
+//    public static void eliminarVenta(int id){
+//        VentaJpaController ctr_jpaVenta = new VentaJpaController();
+//        
+//        try{
+//            ctr_jpaVenta.destroy(id);
+//        } catch (Exception e){
+//            System.out.println("Error al eliminar la venta: " + e);
+//            JOptionPane.showMessageDialog(null, "Error al eliminar los datos de la venta");
+//        }
+//    }
 }

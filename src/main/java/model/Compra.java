@@ -1,4 +1,5 @@
 package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +14,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Compra implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -47,11 +49,11 @@ public class Compra implements Serializable {
         this.fecha = fecha;
     }
 
-    public void addProveedores(Proveedor proveedor){
+    public void addProveedores(Proveedor proveedor) {
         this.proveedores.add(proveedor);
     }
 
-    public void addInsumo(String nombre, double precio){
+    public void addInsumo(String nombre, double precio) {
         this.insumos.add(new Insumo(nombre, precio));
     }
 
@@ -63,5 +65,4 @@ public class Compra implements Serializable {
         return insumos;
     }
 
-    
 }

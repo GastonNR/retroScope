@@ -6,15 +6,19 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
-import model.ClienteVip;
+//import model.ClienteVip;
 import view.Internal_gestionarClientes;
+import model.Servicio;
 
 public class Ctrl_Inter_gestorCliente implements ActionListener {
 
     Internal_gestionarClientes gestorClientes;
+    private Servicio serv;
 
     public Ctrl_Inter_gestorCliente() {
-
+        
+        this.serv = new Servicio();
+        
         this.gestorClientes = new Internal_gestionarClientes();
         gestorClientes.setVisible(true);
         this.cargarTablaClientes();
@@ -39,7 +43,7 @@ public class Ctrl_Inter_gestorCliente implements ActionListener {
     
     private void cargarTablaClientes() {
 
-        List<Cliente> clientes = Cliente.obtenerTodosLosClientes();
+        List<Cliente> clientes = serv.todosClientes();
 
         if (clientes != null) {
             DefaultTableModel modelo = new DefaultTableModel();
@@ -78,7 +82,7 @@ public class Ctrl_Inter_gestorCliente implements ActionListener {
     
     private void buscarCliente() {
 
-        Cliente clienteEncontrado = Cliente.buscarCliente(Integer.parseInt(gestorClientes.txt_busqueda.getText().trim()));
+        Cliente clienteEncontrado = serv.buscarCliente(Integer.parseInt(gestorClientes.txt_busqueda.getText().trim()));
         DefaultTableModel modelo = (DefaultTableModel) gestorClientes.table_clientes.getModel();
 
         int filaEncontrada = -1;
@@ -109,7 +113,7 @@ public class Ctrl_Inter_gestorCliente implements ActionListener {
             Object valorId = gestorClientes.table_clientes.getValueAt(filaSeleccionada, 0);
             int idCliente = Integer.parseInt(valorId.toString());
 
-            Cliente clienteSeleccionado = Cliente.buscarCliente(idCliente);
+            Cliente clienteSeleccionado = serv.buscarCliente(idCliente);
 
             if (clienteSeleccionado != null) {
 
@@ -123,8 +127,7 @@ public class Ctrl_Inter_gestorCliente implements ActionListener {
 
                 if (respuestaEliminacion == JOptionPane.YES_OPTION) {
 
-                    Cliente.eliminarCliente(clienteSeleccionado);
-
+                    serv.borrarCliente(clienteSeleccionado);
 
                     JOptionPane.showMessageDialog(null, "Empleado eliminado correctamente.");
 

@@ -7,13 +7,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Empleado;
 import view.Internal_gestionarEmpleados;
+import model.Servicio;
 
 class Ctrl_Inter_gestorEmpleado implements ActionListener {
 
     public Internal_gestionarEmpleados gestorEmpleado;
+    private Servicio serv;
 
     public Ctrl_Inter_gestorEmpleado() {
 
+        this.serv = new Servicio();
         this.gestorEmpleado = new Internal_gestionarEmpleados();
         gestorEmpleado.setVisible(true);
         this.cargarTablaEmpleados();
@@ -51,7 +54,7 @@ class Ctrl_Inter_gestorEmpleado implements ActionListener {
 
     private void cargarTablaEmpleados() {
 
-        List<Empleado> empleados = Empleado.obtenerTodosLosEmpleados();
+        List<Empleado> empleados = serv.obtenerTodosLosEmpleados();
 
         if (empleados != null) {
             DefaultTableModel modelo = new DefaultTableModel();
@@ -74,7 +77,7 @@ class Ctrl_Inter_gestorEmpleado implements ActionListener {
 
     private void buscarEmpleado() {
 
-        Empleado empleadoEncontrado = Empleado.buscarEmpleado(Integer.parseInt(gestorEmpleado.txt_buscador.getText().trim()));
+        Empleado empleadoEncontrado = serv.buscarEmpleado(Integer.parseInt(gestorEmpleado.txt_buscador.getText().trim()));
         DefaultTableModel modelo = (DefaultTableModel) gestorEmpleado.table_empleados.getModel();
 
         int filaEncontrada = -1;
@@ -102,7 +105,7 @@ class Ctrl_Inter_gestorEmpleado implements ActionListener {
             Object valorId = gestorEmpleado.table_empleados.getValueAt(filaSeleccionada, 0);
             int idEmpleado = Integer.parseInt(valorId.toString());
 
-            Empleado empleadoSeleccionado = Empleado.buscarEmpleado(idEmpleado);
+            Empleado empleadoSeleccionado = serv.buscarEmpleado(idEmpleado);
 
             if (empleadoSeleccionado != null) {
 
@@ -116,7 +119,7 @@ class Ctrl_Inter_gestorEmpleado implements ActionListener {
 
                 if (respuestaEliminacion == JOptionPane.YES_OPTION) {
 
-                    Empleado.eliminarEmpleado(empleadoSeleccionado);
+                    serv.eliminarEmpleado(empleadoSeleccionado);
 
 
                     JOptionPane.showMessageDialog(null, "Empleado eliminado correctamente.");

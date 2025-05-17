@@ -7,17 +7,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Sala;
 import view.Internal_verSalas;
+import model.Servicio;
 
-/**
- *
- * @author nico-ruiz
- */
 public class Ctrl_Inter_verSalas implements ActionListener {
 
     public Internal_verSalas verSalas;
-
+    private Servicio serv;
+    
     public Ctrl_Inter_verSalas() {
-
+        
+        this.serv = new Servicio();
         this.verSalas = new Internal_verSalas();
         verSalas.setVisible(true);
         cargarTablaSalas();
@@ -27,7 +26,7 @@ public class Ctrl_Inter_verSalas implements ActionListener {
     }
 
     private void cargarTablaSalas() {
-        List<Sala> salas = Sala.obtenerTodasLasSalas();
+        List<Sala> salas = serv.obtenerTodasLasSalas();
 
         if (salas != null) {
             DefaultTableModel modelo = new DefaultTableModel();

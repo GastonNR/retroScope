@@ -3,19 +3,21 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.Empleado;
 import view.Internal_nuevoEmpleado;
+import model.Servicio;
 
 public class Ctrl_Inter_nuevoEmpleado implements ActionListener {
 
     public Internal_nuevoEmpleado nuevoEmpleado;
-
+    private Servicio serv;
+    
     public Ctrl_Inter_nuevoEmpleado() {
-
+        
+        this.serv = new Servicio();
         this.nuevoEmpleado = new Internal_nuevoEmpleado();
         nuevoEmpleado.setVisible(true);
 
@@ -172,7 +174,7 @@ public class Ctrl_Inter_nuevoEmpleado implements ActionListener {
             String password = nuevoEmpleado.txt_pass.getText().trim();
 
             Empleado empleado = new Empleado(nombre, dni, correo, password);
-            empleado.guardarEmpleado();
+            serv.guardarEmpleado(empleado);
             limpiarCampos();
 
         }

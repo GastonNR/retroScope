@@ -91,65 +91,65 @@ public class Funcion implements Serializable {
         this.pelicula = pelicula;
     }
 
-    public static void guardarFuncion(Funcion funcion) {
-        FuncionJpaController ctr_jpaFuncion = new FuncionJpaController();
-        try {
-            ctr_jpaFuncion.create(funcion);
-            JOptionPane.showMessageDialog(null, "Funcion guardada con exito");
-        } catch (Exception e) {
-            System.out.println("Error al guardar la funcion " + e);
-        }
-    }
-    
-    public static Funcion buscarFuncion(int id){
-        FuncionJpaController funcionController = new FuncionJpaController();
-        
-        try{
-            return funcionController.findFuncion(id);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro al encontrar la funcion.");
-            return null;
-        }
-    }
-
-    public static List<Funcion> obtenerTodasLasFunciones() {
-
-        FuncionJpaController funcionController = new FuncionJpaController();
-
-        try {
-
-            return funcionController.findFuncionEntities();
-
-        } catch (Exception e) {
-
-            System.out.println("Error al obtener los clientes: " + e.getMessage());
-            return null;
-
-        }
-    }
-    
-    public static void eliminarFuncion(int id){
-        
-        FuncionJpaController ctrl_jpaFuncion = new FuncionJpaController();
-        
-        try{
-            ctrl_jpaFuncion.destroy(id);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "La funcion no se ha podido eliminar");
-            System.out.println("Error al eliminar la funcion" + e);
-        }
-    }
-
-    public static boolean validarHorario(Date horario, int numeroSala) {
-
-        FuncionJpaController ctrl_jpaFuncion = new FuncionJpaController();
-
-        Funcion funcionEncontrada = ctrl_jpaFuncion.coincidenciaSalaHorario(horario, numeroSala);
-        if (funcionEncontrada != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public static void guardarFuncion(Funcion funcion) {
+//        FuncionJpaController ctr_jpaFuncion = new FuncionJpaController();
+//        try {
+//            ctr_jpaFuncion.create(funcion);
+//            JOptionPane.showMessageDialog(null, "Funcion guardada con exito");
+//        } catch (Exception e) {
+//            System.out.println("Error al guardar la funcion " + e);
+//        }
+//    }
+//    
+//    public static Funcion buscarFuncion(int id){
+//        FuncionJpaController funcionController = new FuncionJpaController();
+//        
+//        try{
+//            return funcionController.findFuncion(id);
+//            
+//        } catch (Exception e){
+//            JOptionPane.showMessageDialog(null, "Erro al encontrar la funcion.");
+//            return null;
+//        }
+//    }
+//
+//    public static List<Funcion> obtenerTodasLasFunciones() {
+//
+//        FuncionJpaController funcionController = new FuncionJpaController();
+//
+//        try {
+//
+//            return funcionController.findFuncionEntities();
+//
+//        } catch (Exception e) {
+//
+//            System.out.println("Error al obtener los clientes: " + e.getMessage());
+//            return null;
+//
+//        }
+//    }
+//    
+//    public static void eliminarFuncion(int id){
+//        
+//        FuncionJpaController ctrl_jpaFuncion = new FuncionJpaController();
+//        
+//        try{
+//            ctrl_jpaFuncion.destroy(id);
+//        } catch (Exception e){
+//            JOptionPane.showMessageDialog(null, "La funcion no se ha podido eliminar");
+//            System.out.println("Error al eliminar la funcion" + e);
+//        }
+//    }
+//
+//    public static boolean validarHorario(Date horario, int numeroSala) {
+//
+//        FuncionJpaController ctrl_jpaFuncion = new FuncionJpaController();
+//
+//        Funcion funcionEncontrada = ctrl_jpaFuncion.coincidenciaSalaHorario(horario, numeroSala);
+//        if (funcionEncontrada != null) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }

@@ -13,17 +13,16 @@ import model.Funcion;
 import model.Pelicula;
 import persistencia.exceptions.NonexistentEntityException;
 import view.Internal_gestionarPeliculas;
+import model.Servicio;
 
-/**
- *
- * @author nico-ruiz
- */
 public class Ctrl_Inter_gestorPeliculas implements ActionListener {
 
     public Internal_gestionarPeliculas gestorPeliculas;
+    private Servicio serv;
 
     public Ctrl_Inter_gestorPeliculas() {
-
+        
+        this.serv = new Servicio();
         this.gestorPeliculas = new Internal_gestionarPeliculas();
         gestorPeliculas.setVisible(true);
         this.cargarTablaPeliculas();
@@ -61,7 +60,7 @@ public class Ctrl_Inter_gestorPeliculas implements ActionListener {
     }
 
     private void cargarTablaPeliculas() {
-        List<Pelicula> peliculas = Pelicula.obtenerTodasLasPeliculas();
+        List<Pelicula> peliculas = serv.obtenerTodasLasPeliculas();
 
         if (peliculas != null) {
             DefaultTableModel modelo = new DefaultTableModel();
@@ -110,7 +109,7 @@ public class Ctrl_Inter_gestorPeliculas implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ingrese un titulo");
             return;
         }
-        Pelicula peliculaEncontrada = Pelicula.buscarPelicula(titulo);
+        Pelicula peliculaEncontrada = serv.buscarPelicula(titulo);
         if (peliculaEncontrada == null) {
             JOptionPane.showMessageDialog(null, "La pelicula no existe");
             return;
@@ -142,7 +141,7 @@ public class Ctrl_Inter_gestorPeliculas implements ActionListener {
             Object valorId = gestorPeliculas.table_peliculas.getValueAt(filaSeleccionada, 1);
             String tituloPelicula = valorId.toString();
 
-            Pelicula peliculaSeleccionada = Pelicula.buscarPelicula(tituloPelicula);
+            Pelicula peliculaSeleccionada = serv.buscarPelicula(tituloPelicula);
 
             if (peliculaSeleccionada != null) {
 
@@ -156,7 +155,7 @@ public class Ctrl_Inter_gestorPeliculas implements ActionListener {
 
                 if (respuestaEliminacion == JOptionPane.YES_OPTION) {
                     try {
-                        Pelicula.borrarPelicula(peliculaSeleccionada);
+                        serv.borrarPelicula(peliculaSeleccionada);
                         cargarTablaPeliculas();
                     } catch (NonexistentEntityException e) {
                         System.out.println("Error al llamar al metodo para destruir la pelicula: " + e);
@@ -174,7 +173,7 @@ public class Ctrl_Inter_gestorPeliculas implements ActionListener {
     
     private void cargarFuncionesYSala(int idPelicula){
         
-       Pelicula pelicula = Pelicula.buscarPelicula(idPelicula);
+       Pelicula pelicula = serv.buscarPelicula(idPelicula);
        List<Funcion> funciones = pelicula.getFunciones();
        
        if (pelicula != null) {

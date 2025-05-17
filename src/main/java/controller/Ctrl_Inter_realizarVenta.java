@@ -15,16 +15,17 @@ import model.Pago;
 import model.TipoPago;
 import model.Venta;
 import view.Internal_realizarVenta;
+import model.Servicio;
 
-/**
- *
- * @author nico-ruiz
- */
+
 public class Ctrl_Inter_realizarVenta implements ActionListener{
 
     public Internal_realizarVenta realizarVenta = new Internal_realizarVenta();
+    private Servicio serv;
 
     public Ctrl_Inter_realizarVenta() {
+        
+        this.serv = new Servicio();
         this.realizarVenta.setVisible(true);
         
         realizarVenta.btn_calcularPrecio.addActionListener(this);
@@ -76,18 +77,18 @@ public class Ctrl_Inter_realizarVenta implements ActionListener{
             int idEntrada = (int) realizarVenta.txt_idEntrada.getValue();
             int idFuncion = (int) realizarVenta.txt_idFuncion.getValue();
             
-            Cliente cliente = Cliente.buscarCliente(idCliente);
-            Entrada entrada = Entrada.buscarEntrada(idEntrada);
-            Funcion funcion = Funcion.buscarFuncion(idFuncion);
+            Cliente cliente = serv.buscarCliente(idCliente);
+            Entrada entrada = serv.buscarEntrada(idEntrada);
+            Funcion funcion = serv.buscarFuncion(idFuncion);
             Date FechaVenta = new Date();
             
-            float precio = (float) Funcion.buscarFuncion(idFuncion).getSala().getPrecio();
+            float precio = (float) serv.buscarFuncion(idFuncion).getSala().getPrecio();
             TipoPago tipoPago = Enum.valueOf(TipoPago.class, realizarVenta.combo_pago.getSelectedItem().toString());
             Pago pago = new Pago(precio, tipoPago);
             Venta venta = new Venta(cliente, pago, funcion, FechaVenta);
             
-            Venta.guardarVenta(venta);
-            Entrada.venderEntrada(idEntrada);
+            serv.guardarVenta(venta);
+            serv.venderEntrada(idEntrada);
             JOptionPane.showMessageDialog(null, "La venta ha sido guardada con exito.");
             
         } else {
@@ -106,7 +107,7 @@ public class Ctrl_Inter_realizarVenta implements ActionListener{
         
         if(
             !idClienteMatcher.matches()
-            || Cliente.buscarCliente((int) realizarVenta.txt_idCliente.getValue()) == null
+            || serv.buscarCliente((int) realizarVenta.txt_idCliente.getValue()) == null
             ){
             realizarVenta.txt_idCliente.setBackground(Color.RED);
             JOptionPane.showMessageDialog(null, "Ingrese el id del cliente.");
@@ -114,7 +115,7 @@ public class Ctrl_Inter_realizarVenta implements ActionListener{
         }
         if(
             !idEntradaMatcher.matches()
-            || Entrada.buscarEntrada((int)realizarVenta.txt_idEntrada.getValue()) == null
+            || serv.buscarEntrada((int)realizarVenta.txt_idEntrada.getValue()) == null
             ){
             realizarVenta.txt_idEntrada.setBackground(Color.RED);
             JOptionPane.showMessageDialog(null, "Ingrese el identificador de la entrada");
@@ -122,7 +123,7 @@ public class Ctrl_Inter_realizarVenta implements ActionListener{
         }
         if(
             !idFuncionMatcher.matches()
-            || Funcion.buscarFuncion((int)realizarVenta.txt_idFuncion.getValue()) == null
+            || serv.buscarFuncion((int)realizarVenta.txt_idFuncion.getValue()) == null
             ){
             realizarVenta.txt_idFuncion.setBackground(Color.RED);
             JOptionPane.showMessageDialog(null, "Ingrese el identificador de la funcion");
@@ -134,7 +135,7 @@ public class Ctrl_Inter_realizarVenta implements ActionListener{
     private void calcularPrecio() {
        if(validarDatos()){
            int idEntrada = (int) realizarVenta.txt_idEntrada.getValue();
-           Entrada entrada = Entrada.buscarEntrada(idEntrada);
+           Entrada entrada = serv.buscarEntrada(idEntrada);
            double precio = entrada.getPrecio();
            double interes = 0;
            

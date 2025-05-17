@@ -8,11 +8,13 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.ClienteVip;
+import model.Servicio;
 import view.Internal_nuevoCliente;
 
 class Ctrl_Inter_nuevoCliente implements ActionListener {
     
     public Internal_nuevoCliente nuevoCliente;
+    private Servicio serv;
     
     public Ctrl_Inter_nuevoCliente() {
         
@@ -76,10 +78,11 @@ class Ctrl_Inter_nuevoCliente implements ActionListener {
             
             if (nuevoCliente.check_VIP.isSelected()) {
                 ClienteVip nuevoClienteVip = new ClienteVip(nombre, correo, 10);
-                ClienteVip.guardarCliente(nuevoClienteVip);
+                serv.guardarCliente(nuevoClienteVip);
             } else {
                 Cliente nuevoCliente = new Cliente(nombre, correo);
-                Cliente.guardarCliente(nuevoCliente);
+                serv.crearCliente(nuevoCliente);
+                
             }
             
             limpiarCampos();

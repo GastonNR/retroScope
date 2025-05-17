@@ -155,7 +155,7 @@ public class ControladorPersistencia {
 
     public void venderEntrada(int id) {
 
-        Entrada entrada = Entrada.buscarEntrada(id);
+        Entrada entrada = entradaJpa.findEntrada(id);
 
         try {
             entradaJpa.actualizarEntrada(id);

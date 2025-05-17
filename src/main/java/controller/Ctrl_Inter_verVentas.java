@@ -7,13 +7,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Venta;
 import view.Internal_verVentas;
+import model.Servicio;
 
 public class Ctrl_Inter_verVentas implements ActionListener {
 
     public Internal_verVentas verVentas;
+    private Servicio serv;
 
     public Ctrl_Inter_verVentas() {
 
+        this.serv = new Servicio();
         this.verVentas = new Internal_verVentas();
         verVentas.setVisible(true);
         cargarVentas();
@@ -50,7 +53,7 @@ public class Ctrl_Inter_verVentas implements ActionListener {
     private void buscarVenta() {
         int idVenta = (int) verVentas.txt_idVenta.getValue();
 
-        Venta ventaEncontrada = Venta.buscarVenta(idVenta);
+        Venta ventaEncontrada = serv.buscarVenta(idVenta);
         if (ventaEncontrada != null) {
             
             DefaultTableModel modelo = (DefaultTableModel) verVentas.table_ventas.getModel();
@@ -75,7 +78,7 @@ public class Ctrl_Inter_verVentas implements ActionListener {
     }
 
     private void cargarVentas() {
-        List<Venta> ventas = Venta.cargarVentas();
+        List<Venta> ventas = serv.cargarVentas();
 
         DefaultTableModel tablaVentaModelo = new DefaultTableModel();
 
@@ -106,7 +109,7 @@ public class Ctrl_Inter_verVentas implements ActionListener {
         if (filaSeleccionada != -1) {
             int valorId = (int) verVentas.table_ventas.getValueAt(filaSeleccionada, 0);
 
-            Venta ventaSeleccionada = Venta.buscarVenta(valorId);
+            Venta ventaSeleccionada = serv.buscarVenta(valorId);
 
             if (ventaSeleccionada != null) {
 
@@ -120,7 +123,7 @@ public class Ctrl_Inter_verVentas implements ActionListener {
 
                 if (respuestaEliminacion == JOptionPane.YES_OPTION) {
                     try {
-                        Venta.eliminarVenta(ventaSeleccionada.getId());
+                        serv.eliminarVenta(ventaSeleccionada.getId());
                         cargarVentas();
                     } catch (Exception e) {
                         System.out.println("Error al llamar al metodo para borrar la venta: " + e);

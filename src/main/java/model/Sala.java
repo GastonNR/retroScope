@@ -14,12 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import persistencia.SalaJpaController;
 
-/**
- *
- * @author nico-ruiz
- */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
@@ -75,28 +70,4 @@ public class Sala implements Serializable {
         return new ArrayList<>(funciones);
     }
 
-    public static List<Sala> obtenerTodasLasSalas() {
-
-        SalaJpaController salaController = new SalaJpaController();
-
-        try {
-
-            return salaController.findSalaEntities();
-
-        } catch (Exception e) {
-
-            System.out.println("Error al obtener los clientes: " + e.getMessage());
-            return null;
-
-        }
-    }
-
-    public static Sala buscarSala(int numeroSala) {
-        SalaJpaController ctr_jpaSala = new SalaJpaController();
-        try {
-            return ctr_jpaSala.findSala(numeroSala);
-        } finally {
-
-        }
-    }
 }

@@ -8,8 +8,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Proveedor implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombre;
     private String telefono;
@@ -23,7 +24,7 @@ public class Proveedor implements Serializable {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
-    }    
+    }
 
     public int getId() {
         return id;
@@ -57,12 +58,4 @@ public class Proveedor implements Serializable {
         this.direccion = direccion;
     }
 
-    @Override
-    public String toString() {
-        return "Proveedor{" +
-                "nombre='" + nombre + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
-    }
 }

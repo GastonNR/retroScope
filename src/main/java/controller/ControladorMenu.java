@@ -2,8 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.Internal_realizarVenta;
-import view.Internal_verVentas;
+//import view.Internal_realizarVenta;
+//import view.Internal_verVentas;
 import view.Menu;
 import static view.Menu.jDesktopPane_menu;
 

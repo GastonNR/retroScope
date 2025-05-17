@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.swing.JOptionPane;
-import persistencia.EntradaJpaController;
 
 @Entity
 public class Entrada implements Serializable {
@@ -69,29 +67,6 @@ public class Entrada implements Serializable {
 
     public boolean isVendida() {
         return vendida;
-    }
-    
-    public static Entrada buscarEntrada(int id) {
-        EntradaJpaController jpaEntrada = new EntradaJpaController();
-
-        try {
-            return jpaEntrada.findEntrada(id);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se encontro la entrada.");
-            return null;
-        }
-    }
-
-    public static void venderEntrada(int id) {
-
-        Entrada entrada = Entrada.buscarEntrada(id);
-        EntradaJpaController jpaEntrada = new EntradaJpaController();
-
-        try {
-            jpaEntrada.actualizarEntrada(id);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al vender la entrada.");
-        }
     }
 
 }

@@ -10,13 +10,16 @@ import model.Clasificacion;
 import model.Genero;
 import model.Pelicula;
 import view.Internal_agregarPelicula;
+import model.Servicio;
 
 class Ctrl_Inter_agregarPelicula implements ActionListener {
 
     public Internal_agregarPelicula nuevaPelicula;
+    private Servicio serv;
 
     public Ctrl_Inter_agregarPelicula() {
-
+        
+        this.serv = new Servicio();
         this.nuevaPelicula = new Internal_agregarPelicula();
         nuevaPelicula.setVisible(true);
 
@@ -188,7 +191,7 @@ class Ctrl_Inter_agregarPelicula implements ActionListener {
             String promocion = nuevaPelicula.combo_promocion.getSelectedItem().toString();
 
             Pelicula pelicula = new Pelicula(titulo, genero, minutos, clasificacion, idioma, subtitulos);
-            pelicula.guardarPelicula(pelicula);
+            serv.guardarPelicula(pelicula);
             limpiarCampos();
 
         } else {
