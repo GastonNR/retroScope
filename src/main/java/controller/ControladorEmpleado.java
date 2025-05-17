@@ -2,14 +2,14 @@ package controller;
 
 import model.Servicio;
 import model.Empleado;
-import persistencia.EmpleadoJpaController;
+//import persistencia.EmpleadoJpaController;
 
 public class ControladorEmpleado {
 
     private Servicio serv;
 
     public ControladorEmpleado() {
-        Servicio serv = new Servicio();
+        this.serv = new Servicio();
 
     }
 

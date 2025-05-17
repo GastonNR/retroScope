@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.Insumo;
 import model.Proveedor;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2025-05-16T23:56:21", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2025-05-17T11:01:01", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Compra.class)
 public class Compra_ { 
 
